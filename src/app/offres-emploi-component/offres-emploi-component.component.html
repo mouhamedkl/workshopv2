@@ -1,0 +1,40 @@
+<!-- offres-emploi.component.html -->
+<form (ngSubmit)="chercherEmploi()">
+  <label for="entrepriseRecherchee">Chercher un emploi par entreprise:</label>
+  <input type="text" class="form-control" id="entrepriseRecherchee" name="entrepriseRecherchee" [(ngModel)]="entrepriseRecherchee">
+  <button class="btn btn-success" type="submit">Chercher</button>
+</form>
+
+<ul>
+  <li  *ngFor="let emploi of listeEmploiFiltree">{{emploi.entreprise}} - {{emploi.etat}}</li>
+</ul>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Reference</th>
+      <th>Titre</th>
+      <th>Entreprise</th>
+      <th>Etat</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let job of listeEmploi">
+      <td>{{ job.reference }}</td>
+      <td>{{ job.title }}</td>
+      <td>{{ job.entreprise }}</td>
+      <td>{{ job.etat ? 'Active' : 'Inactive' }}</td>
+      <td>
+        <button class="btn btn-primary"
+                [disabled]="!job.etat"
+                (click)="postuler(job)">
+          Postuler
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-success" (click)="calculerBilan()">Bilan</button>
+<p>{{ nombreOffresNonCloturees }} offres d'emploi non clôturées</p>

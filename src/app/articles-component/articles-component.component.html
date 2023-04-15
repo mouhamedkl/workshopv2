@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div *ngFor="let article of listeArticles">
+        <div *ngIf="article.categorie !== 'Travail'">
+          <fieldset  class="border p-5"  >
+            <legend class="text-center" >{{ article.titre }}</legend>
+            <div>
+              <p>Auteur: {{ article.auteur }} </p>
+              <p>Date: {{ article.date }}</p>
+              <p>Contenu: {{ article.contenu }}</p>
+              <p>Category: {{ article.categorie }}</p>
+            </div>
+          </fieldset>
+        </div>
+        <br>
+      </div>
+
+    </div>
+  </div>
+</div>
+
