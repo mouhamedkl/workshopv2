@@ -1,0 +1,46 @@
+<form #ngform="ngForm" >
+ <div class="form-group">
+  <div class="form-control">
+    <label for="nom">Nom :</label>
+  <input type="text" id="nom" name="nom" #nom="ngModel" ngModel class="form-control" required>
+  <span style="color:red" *ngIf="nom?.errors?.['required'] && nom.touched"> nom is Required</span>
+
+  <label for="email">Email :</label>
+  <input type="email" id="email" name="email" ngModel #email="ngModel" class="form-control"
+    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}" required>
+  <span style="color:red" *ngIf="email?.errors?.['required'] && email.touched"> email is Required</span>
+  <span style="color:red" *ngIf="email?.errors?.['pattern'] && email.touched"> invalid email format</span>
+
+<br>
+
+<fieldset class="border p-5">
+  <legend>Formation payment</legend>
+
+  <label for="type-de-carte">Type de carte :</label>
+  <input type="text" id="type-de-carte" class="form-control" ngModel #typecarte="ngModel" name="typecarte" required>
+  <span style="color:red" *ngIf="typecarte?.errors?.['required'] && typecarte.touched"> Type de carte est obligatoire</span>
+
+  <label for="numero-de-carte">Numéro de carte :</label>
+  <input type="text" id="numero-de-carte" class="form-control" ngModel #numero="ngModel" minlength="16" maxlength="16" name="numero" required>
+  <span style="color:red" *ngIf="numero?.errors?.['required'] && numero.touched"> Numéro de carte est obligatoire</span>
+  <span style="color:red" *ngIf="numero?.errors?.['minlength']"> Numéro de carte doit contenir au moins 16 chiffres</span>
+  <span style="color:red" *ngIf="numero?.errors?.['maxlength']"> Numéro de carte ne doit pas contenir plus de 16 chiffres</span>
+
+  <label for="date-dexpiration">Date d'expiration :</label>
+  <input type="text" id="date-dexpiration" class="form-control" ngModel #date="ngModel" name="date" required>
+  <span style="color:red" *ngIf="date?.errors?.['required'] && date.touched"> Date d'expiration est obligatoire</span>
+
+  <div *ngIf="date.valid && numero.valid && typecarte.valid">
+    <label for="code">Code :</label>
+    <input type="text" id="code" class="form-control" ngModel #code="ngModel" name="code" required>
+    <span style="color:red" *ngIf="code?.errors?.['required'] && code.touched"> Code est obligatoire</span>
+  </div>
+
+  <br>
+</fieldset>
+
+
+  <button class="btn btn-danger lg" (click)="ajouter(ngform)" [disabled]="ngform.invalid">ajouter</button>
+  </div>
+ </div>
+</form>
